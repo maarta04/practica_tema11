@@ -10,7 +10,8 @@
     "db:migrate": "npx prisma migrate dev",
     "db:push": "npx prisma db push",
     "db:seed": "npx prisma db seed",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "prisma generate"
   },
   "engines": {
     "node": ">=22.0.0"
