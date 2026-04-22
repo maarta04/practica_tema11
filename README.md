@@ -229,8 +229,36 @@ practica_T9/
 - Paginación en listados
 - Endpoint de estadísticas (libros más prestados, mejor valorados)
 
+## Deploy (T11)
+
+La API está desplegada en Railway:
+
+```
+https://<tu-proyecto>.railway.app/api/health
+```
+
+### Pasos para desplegar en Railway
+
+1. Crear cuenta en [railway.app](https://railway.app)
+2. New Project → Deploy from GitHub repo → seleccionar este repositorio
+3. Añadir las variables de entorno desde `.env.example` en el panel de Railway
+4. Railway detecta el `railway.json` automáticamente y usa `npm start`
+
+### Levantar en local con Docker
+
+```bash
+docker-compose up --build
+```
+
+Levanta la API en `http://localhost:3000` con una PostgreSQL local.
+
+### CI/CD
+
+El pipeline de GitHub Actions (`.github/workflows/test.yml`) ejecuta los tests automáticamente en cada push a `main`.
+
 ## Recursos
 
 - Prisma Docs
 - Supabase Docs
 - Teoría T9 - Supabase + Prisma
+- Teoría T11 - Deploy y DevOps
