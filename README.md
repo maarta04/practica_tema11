@@ -234,7 +234,7 @@ practica_T9/
 La API está desplegada en Railway:
 
 ```
-https://<tu-proyecto>.railway.app/api/health
+https://practicatema11-production.up.railway.app/api/health
 ```
 
 ### Pasos para desplegar en Railway
