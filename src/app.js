@@ -27,10 +27,10 @@ app.get('/', (req, res) => {
     res.json({ message: 'Biblioteca API funcionando' })
 })
 
-const PORT = process.env.PORT || 3000
-
-app.listen(PORT, () => {
-    console.log(`Servidor corriendo en puerto ${PORT}`)
-})
+if (require.main === module) {
+    app.listen(env.PORT, () => {
+        console.log(`Servidor corriendo en puerto ${env.PORT} [${env.NODE_ENV}]`)
+    })
+}
 
 module.exports = app
