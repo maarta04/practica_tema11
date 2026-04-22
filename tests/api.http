@@ -1,0 +1,133 @@
+@baseUrl = http://localhost:3000/api
+@token = TU_TOKEN_AQUI
+
+### AUTH
+
+### Registrar usuario normal
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "nuevo@ejemplo.com",
+  "name": "Usuario Nuevo",
+  "password": "password123"
+}
+
+### Registrar administrador
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "admin@biblioteca.com",
+  "name": "Admin Principal",
+  "password": "password123",
+  "role": "ADMIN"
+}
+
+### Registrar bibliotecario
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "librarian@biblioteca.com",
+  "name": "Bibliotecario",
+  "password": "password123",
+  "role": "LIBRARIAN"
+}
+
+### Login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@biblioteca.com",
+  "password": "password123"
+}
+
+### Ver mi perfil (requiere token)
+GET {{baseUrl}}/auth/me
+Authorization: Bearer {{token}}
+
+### BOOKS
+
+### Listar todos los libros
+GET {{baseUrl}}/books
+
+### Listar libros con filtros
+GET {{baseUrl}}/books?genre=Ficción&available=true
+
+### Filtrar por autor
+GET {{baseUrl}}/books?author=Orwell
+
+### Obtener libro por ID
+GET {{baseUrl}}/books/1
+
+### Crear libro (requiere LIBRARIAN o ADMIN)
+POST {{baseUrl}}/books
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "isbn": "978-84-339-7243-8",
+  "title": "El nombre de la rosa",
+  "author": "Umberto Eco",
+  "genre": "Misterio",
+  "description": "Un monje investiga una serie de muertes en una abadía medieval",
+  "publishedYear": 1980,
+  "copies": 3
+}
+
+### Actualizar libro (requiere LIBRARIAN o ADMIN)
+PUT {{baseUrl}}/books/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "description": "Descripción actualizada del libro"
+}
+
+### Eliminar libro (requiere ADMIN)
+DELETE {{baseUrl}}/books/1
+Authorization: Bearer {{token}}
+
+### LOANS
+
+### Ver mis préstamos
+GET {{baseUrl}}/loans
+Authorization: Bearer {{token}}
+
+### Ver todos los préstamos (requiere LIBRARIAN o ADMIN)
+GET {{baseUrl}}/loans/all
+Authorization: Bearer {{token}}
+
+### Solicitar préstamo
+POST {{baseUrl}}/loans
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "bookId": 1
+}
+
+### Devolver libro
+PUT {{baseUrl}}/loans/1/return
+Authorization: Bearer {{token}}
+
+### REVIEWS
+
+### Ver reseñas de un libro
+GET {{baseUrl}}/books/1/reviews
+
+### Crear reseña (el libro debe estar devuelto)
+POST {{baseUrl}}/books/2/reviews
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "rating": 5,
+  "comment": "Un libro imprescindible, muy recomendable"
+}
+
+### Eliminar reseña
+DELETE {{baseUrl}}/reviews/1
+Authorization: Bearer {{token}}
